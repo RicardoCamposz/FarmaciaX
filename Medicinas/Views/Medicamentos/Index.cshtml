@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Medicinas.Models.Medicamentos>
+
+@{
+    ViewData["Title"] = "Lista de medicamentos";
+}
+
+<h1>Listado de medicamentos</h1>
+
+<p>
+    <a asp-action="Create"><input type="button" class="btn btn-success" value="Añadir medicamento" /></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Presentación
+            </th>
+            <th>
+                Contenido actual
+            </th>
+            <th>
+                Cantidad de horas entre consumo
+            </th>
+            <th>
+                Dosis de consumo
+            </th>
+            <th>
+                Fecha de caducidad
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Presentacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContenidoActual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FrecuenciaDeTomaHr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadDeToma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Caducidad)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" class="btn btn-info" value="Registrar consumo" /></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

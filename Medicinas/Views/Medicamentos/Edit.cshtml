@@ -1,0 +1,51 @@
+﻿@model Medicinas.Models.Medicamentos
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Registrar consumo</h1>
+
+<h3>@Model.Nombre @Model.Presentacion</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <h4>@Model.Descripcion</h4>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6"><h5>Dósis restantes: @Model.ContenidoActual</h5></div>
+                <div class="col-md-6"><h5>Tomar @Model.CantidadDeToma cada: @Model.FrecuenciaDeTomaHr horas</h5></div>
+            </div>
+            <div class="form-group">
+                @if (DateTime.Now > Model.Caducidad)
+                {
+                    <div class="form-group">
+                        <h4>El medicamento ha caducado, no puede registrar una toma.</h4>
+                        <a asp-action="Index"><input type="button" class="btn btn-danger" value="Volver al listado" /></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <h4>El medicamento caduca el @Model.Caducidad</h4>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Registrar consumo" class="btn btn-primary" />
+                        <a asp-action="Index"><input type="button" class="btn btn-danger" value="Volver al listado" /></a>
+                    </div>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
